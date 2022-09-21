@@ -1,3 +1,4 @@
+const fs = require('fs');
 const http = require('http');
 const url = require('url');
 
@@ -10,7 +11,15 @@ const server = http.createServer((req, res) => {
         res.end('This is the Overview!');
     }else if (pathName === '/product'){
         res.end('This is the Product!');
-    }else {
+    } else if (pathName === '/api'){
+        fs.readFile('/Users/yash/Documents/GitHub/Node_JS_Repo/dev-data/data.json', 'utf-8', (err, data) => {
+            const product_data = JSON.parse(data);
+            console.log(product_data);
+        })
+    
+        res.end('API');
+    }
+    else {
         res.writeHead(404, {
             'Content-time':'text/html',
             'my-own-header':'hello World'
